@@ -12,6 +12,8 @@ import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import s from './ContactList.module.css';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class ContactList extends Component {
   componentDidMount() {
@@ -31,12 +33,9 @@ class ContactList extends Component {
                 <p className={s.ContactList__text}>{name}:</p>
                 <p className={s.ContactList__text}>{number}</p>
 
-                <button
-                  className={s.ContactList__btn}
-                  onClick={() => onDeleteContacts(id)}
-                >
+                <Button variant="outline-dark" onClick={() => onDeleteContacts(id)}>
                   Delete
-                </button>
+                </Button>
               </li>
             ))
           ) : (

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as contactsOperations from '../../redux/contacts/contacts-operations';
 import { getAllContacts } from '../../redux/contacts/contacts-selectors';
 import s from './ContactForm.module.css';
+import { Button, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class ContactForm extends Component {
   state = {
@@ -20,9 +22,9 @@ class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.props.contacts);
+    // console.log(this.props.contacts);
     const existContact = this.props.contacts.find(
-      newContact => newContact.name === this.state.name,
+      newContact => newContact.name.toLowerCase() === this.state.name.toLowerCase(),
     );
 
     if (existContact) {
@@ -37,35 +39,41 @@ class ContactForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit} className={s.form}>
-        <label>
-          Name
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={this.hanldeChange}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            placeholder="Name..."
-            required
-          />
-        </label>
-        <label>
-          Number
-          <input
-            type="phone"
-            name="number"
-            value={number}
-            onChange={this.hanldeChange}
-            placeholder="Phone..."
-            required
-          />
-        </label>
-        <button type="submit" className={s.btnForm}>
+      <Form onSubmit={this.handleSubmit} className={s.form}>
+        <Form.Group>
+          <Form.Label>
+            Name
+            <Form.Control
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.hanldeChange}
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+              placeholder="Name..."
+              required
+            />
+          </Form.Label>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>
+            Number
+            <Form.Control
+              type="tel"
+              name="number"
+              value={number}
+              onChange={this.hanldeChange}
+              placeholder="Phone..."
+              // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+              title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+              required
+            />
+          </Form.Label>
+        </Form.Group>
+        <Button type="submit" variant="outline-dark">
           Add contact
-        </button>
-      </form>
+        </Button>
+      </Form>
     );
   }
 }
