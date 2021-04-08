@@ -16,7 +16,7 @@ const styles = {
 
 const Navigation = () => {
   return (
-    <nav variant="tabs" defaultActiveKey="/home">
+    <nav>
       <NavLink exact to="/" style={styles.link} activeStyle={styles.activeLink}>
         Главная
       </NavLink>

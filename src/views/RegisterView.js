@@ -1,41 +1,95 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { register } from '../redux/auth/auth-operations';
+import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const styles = {
+  form: {
+    width: 320,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  label: {
+    display: 'flex',
+    flexDirection: 'column',
+
+    marginBottom: 15,
+  },
+};
+
 class RegisterView extends Component {
+  state = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
+    console.log(e.currentTarget.name);
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.props.onRegister(this.state);
+
+    this.setState({ name: '', email: '', password: '' });
+  };
   render() {
+    const { name, email, password } = this.state;
+
     return (
       <div>
         <h3>Страница регистрации</h3>
 
-        <Form autoComplete="off">
-          <Form.Group>
-            <Form.Label>
-              Name
-              <Form.Control type="text" name="name" placeholder="Enter name" />
-            </Form.Label>
-          </Form.Group>
+        <form autoComplete="off" style={styles.form}>
+          <label style={styles.label}>
+            Name
+            <input
+              value={name}
+              onChange={this.handleChange}
+              type="text"
+              name="name"
+              placeholder="Enter name"
+            />
+          </label>
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>
-              Email address
-              <Form.Control type="email" name="email" placeholder="Enter email" />
-            </Form.Label>
-          </Form.Group>
+          <label style={styles.label}>
+            Email address
+            <input
+              value={email}
+              onChange={this.handleChange}
+              type="email"
+              name="email"
+              placeholder="Enter email"
+            />
+          </label>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>
-              Email address
-              <Form.Control type="password" name="password" placeholder="Password" />
-            </Form.Label>
-          </Form.Group>
+          <label style={styles.label}>
+            Email address
+            <input
+              value={password}
+              onChange={this.handleChange}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+          </label>
+
           <Button type="submit" variant="outline-dark">
             Submit
           </Button>
-        </Form>
+        </form>
       </div>
     );
   }
 }
 
-export default RegisterView;
+const mapDispatchToProps = {
+  onRegister: register,
+};
+
+export default connect(null, mapDispatchToProps)(RegisterView);

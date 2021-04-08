@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -7,7 +8,7 @@ class LoginView extends Component {
     return (
       <div>
         <h3>Страница логина</h3>
-        <Form autoComplete="off">
+        <Form onSubmit={this.handleSubmit} autoComplete="off">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>
               Email address
