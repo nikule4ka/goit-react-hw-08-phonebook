@@ -7,11 +7,12 @@ axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
 
 const register = credential => async dispatch => {
   dispatch(registerRequest());
-
+  console.log(credential);
   try {
     const res = await axios.post('/users/signup', credential);
-    console.log(res);
+
     dispatch(registerSuccess(res.data));
+    console.log(res.data);
   } catch (error) {
     dispatch(registerError(error));
   }
