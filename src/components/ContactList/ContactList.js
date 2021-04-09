@@ -22,6 +22,7 @@ class ContactList extends Component {
 
   render() {
     const { contacts, onDeleteContacts, isloading } = this.props;
+
     return (
       <>
         {isloading && <Loader type="Puff" color="#00BFFF" height={50} width={50} />}
@@ -50,7 +51,7 @@ class ContactList extends Component {
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     }).isRequired,
@@ -64,7 +65,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteContacts: id => dispatch(contactsOperations.deleteContact(id)),
+  onDeleteContacts: contactId => dispatch(contactsOperations.deleteContact(contactId)),
   fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
 });
 

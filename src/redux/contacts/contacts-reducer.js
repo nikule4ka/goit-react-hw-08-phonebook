@@ -19,7 +19,7 @@ const items = createReducer([], {
     return [payload, ...state];
   },
   [deleteContactsSuccess]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
+    state.filter(({ contactId }) => contactId !== payload),
 });
 
 const filter = createReducer('', {
