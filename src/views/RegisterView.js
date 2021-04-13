@@ -41,6 +41,14 @@ class RegisterView extends Component {
     this.setState({ name: '', email: '', password: '' });
   };
 
+  isValid = () => {
+    const { name, email, password } = this.state;
+    if (name === '' || email === '' || password === '') {
+      return false;
+    }
+    return true;
+  };
+
   render() {
     const { name, email, password } = this.state;
 
@@ -77,7 +85,7 @@ class RegisterView extends Component {
 
           <Form.Group>
             <Form.Label>
-              Email address
+              Password
               <Form.Control
                 value={password}
                 onChange={this.handleChange}
@@ -88,7 +96,7 @@ class RegisterView extends Component {
             </Form.Label>
           </Form.Group>
 
-          <Button type="submit" variant="outline-dark">
+          <Button disabled={!this.isValid()} type="submit" variant="secondary" size="lg">
             Submit
           </Button>
         </Form>

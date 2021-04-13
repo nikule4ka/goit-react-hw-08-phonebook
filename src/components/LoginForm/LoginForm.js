@@ -25,6 +25,14 @@ class LoginView extends Component {
     this.setState({ email: '', password: '' });
   };
 
+  isValid = () => {
+    const { email, password } = this.state;
+    if (email === '' || password === '') {
+      return false;
+    }
+    return true;
+  };
+
   render() {
     const { email, password } = this.state;
 
@@ -56,7 +64,7 @@ class LoginView extends Component {
               />
             </Form.Label>
           </Form.Group>
-          <Button type="submit" variant="outline-dark">
+          <Button type="submit" disabled={!this.isValid()} variant="secondary" size="lg">
             Submit
           </Button>
         </Form>
