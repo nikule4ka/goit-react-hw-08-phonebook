@@ -27,7 +27,7 @@ const token = {
 
 const register = credential => async dispatch => {
   dispatch(registerRequest());
-  console.log(credential);
+
   try {
     const response = await axios.post('/users/signup', credential);
 
@@ -79,7 +79,11 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
   try {
     const response = await axios.get('/users/current');
-  } catch (error) {}
+
+    dispatch(getCurrentUserSuccess(response.data));
+  } catch (error) {
+    dispatch(getCurrentUserError(error.message));
+  }
 };
 
 export { register, logIn, logOut, getCurrentUser };

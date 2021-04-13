@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as contactsOperations from '../../redux/contacts/contacts-operations';
 import { getAllContacts } from '../../redux/contacts/contacts-selectors';
+
+import PropTypes from 'prop-types';
+
 import s from './ContactForm.module.css';
 import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,6 +13,10 @@ class ContactForm extends Component {
   state = {
     name: '',
     number: '',
+  };
+
+  static ptopTypes = {
+    onSubmit: PropTypes.func.isRequired,
   };
 
   hanldeChange = e => {

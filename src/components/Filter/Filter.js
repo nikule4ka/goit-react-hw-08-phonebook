@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import s from './Filter.module.css';
 import * as contactsActions from '../../redux/contacts/contacts-action';
 import { getFilter } from '../../redux/contacts/contacts-selectors';
+import { Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Filter = ({ value, onChange }) => (
-  <label htmlFor="" className={s.filter__label}>
+  <Form.Label htmlFor="" className={s.filter__label}>
     Find contacts by name
-    <input type="text" name="filter" value={value} onChange={onChange} required />
-  </label>
+    <Form.Control type="text" name="filter" value={value} onChange={onChange} required />
+  </Form.Label>
 );
 
 Filter.defaultProps = {

@@ -1,27 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as authOperations from '../redux/auth/auth-operations';
-import Container from '../components/Container';
-import { Button, Form, FormLabel } from 'react-bootstrap';
+import * as authOperations from '../../redux/auth/auth-operations';
+import Container from '../Container';
+import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const styles = {
-  form: {
-    width: 320,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-
-    marginBottom: 15,
-  },
-};
-
-class RegisterView extends Component {
+class LoginView extends Component {
   state = {
-    name: '',
     email: '',
     password: '',
   };
@@ -36,33 +21,17 @@ class RegisterView extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
-    this.props.onRegister(this.state);
-    this.setState({ name: '', email: '', password: '' });
+    this.props.onLogin(this.state);
+    this.setState({ email: '', password: '' });
   };
 
   render() {
-    const { name, email, password } = this.state;
+    const { email, password } = this.state;
 
     return (
       <Container>
-        <h3>Registration</h3>
-
-        <Form autoComplete="off" style={styles.form} onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} autoComplete="off">
           <Form.Group controlId="formBasicEmail">
-            <FormLabel>
-              Name
-              <Form.Control
-                value={name}
-                onChange={this.handleChange}
-                type="text"
-                name="name"
-                placeholder="Enter name"
-              />
-            </FormLabel>
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
             <Form.Label>
               Email address
               <Form.Control
@@ -75,7 +44,7 @@ class RegisterView extends Component {
             </Form.Label>
           </Form.Group>
 
-          <Form.Group>
+          <Form.Group controlId="formBasicPassword">
             <Form.Label>
               Email address
               <Form.Control
@@ -87,7 +56,6 @@ class RegisterView extends Component {
               />
             </Form.Label>
           </Form.Group>
-
           <Button type="submit" variant="outline-dark">
             Submit
           </Button>
@@ -98,7 +66,7 @@ class RegisterView extends Component {
 }
 
 const mapDispatchToProps = {
-  onRegister: authOperations.register,
+  onLogin: authOperations.logIn,
 };
 
-export default connect(null, mapDispatchToProps)(RegisterView);
+export default connect(null, mapDispatchToProps)(LoginView);

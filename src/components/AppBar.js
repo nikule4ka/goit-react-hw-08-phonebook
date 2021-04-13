@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import backHeader from '../images/backHeader.png';
+
 import Navigation from './Navigation';
 import UserMenu from './UserMenu';
 import AuthNav from './AuthNav';
-import { connect } from 'react-redux';
 import { getIsAuthenticated } from '../redux/auth/auth-selectors';
 
 const styles = {
@@ -10,7 +12,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: '1px solid #2A363B',
+    backgroundImage: `url(${backHeader})`,
+    width: '100%',
+    height: 75,
+    paddingRight: 30,
+    paddingLeft: 30,
   },
 };
 

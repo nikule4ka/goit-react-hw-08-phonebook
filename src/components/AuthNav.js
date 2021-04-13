@@ -6,11 +6,12 @@ const styles = {
     display: 'inline-block',
     textDecoration: 'none',
     padding: 12,
-    fontWeight: 700,
+    fontWeight: 400,
+    fontSize: 20,
     color: '#2A363B',
   },
   activeLink: {
-    color: '#E84A5F',
+    color: '#495939',
   },
 };
 
@@ -18,10 +19,10 @@ const AuthNav = () => {
   return (
     <div>
       <NavLink exact to="/register" style={styles.link} activeStyle={styles.activeLink}>
-        Регистрация
+        Registration
       </NavLink>
       <NavLink exact to="/login" style={styles.link} activeStyle={styles.activeLink}>
-        Логин
+        Log in
       </NavLink>
     </div>
   );

@@ -2,31 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import * as contactsOperations from '../../redux/contacts/contacts-operations';
-import {
-  getIsLoading,
-  getVisibleContacts,
-} from '../../redux/contacts/contacts-selectors';
-
-import Loader from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { deleteContact } from '../../redux/contacts/contacts-operations';
+import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
 
 import s from './ContactList.module.css';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class ContactList extends Component {
-  componentDidMount() {
-    this.props.fetchContacts();
-  }
-
   render() {
-    const { contacts, onDeleteContacts, isloading } = this.props;
+    const { contacts, onDeleteContacts } = this.props;
 
     return (
       <>
-        {isloading && <Loader type="Puff" color="#00BFFF" height={50} width={50} />}
-
         <ul className={s.ContactList}>
           {contacts.length ? (
             contacts.map(({ id, name, number }) => (
@@ -61,12 +49,10 @@ ContactList.propTypes = {
 
 const mapStateToProps = state => ({
   contacts: getVisibleContacts(state),
-  isLoading: getIsLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteContacts: contactId => dispatch(contactsOperations.deleteContact(contactId)),
-  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
+  onDeleteContacts: contactId => dispatch(deleteContact(contactId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
